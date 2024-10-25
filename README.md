@@ -1,5 +1,5 @@
 # PhD Thesis
-[![Build](https://github.com/Virtlink/latex-phd-thesis-template/actions/workflows/paper.yml/badge.svg)](https://github.com/Virtlink/latex-phd-thesis-template/actions)
+[![Build](https://github.com/Virtlink/latex-phd-thesis-template/actions/workflows/paper.yaml/badge.svg)](https://github.com/Virtlink/latex-phd-thesis-template/actions)
 [![License](https://img.shields.io/github/license/Virtlink/latex-phd-thesis-template)](https://github.com/Virtlink/latex-phd-thesis-template/blob/main/LICENSE)
 [![Artifact](https://img.shields.io/badge/artifact-latest-brightgreen)](https://nightly.link/Virtlink/latex-phd-thesis-template/workflows/build/main/paper.zip)
 
