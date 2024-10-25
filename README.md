@@ -5,6 +5,9 @@
 
 This is my PhD Thesis Template for LaTeX.  It is designed to work with XeLaTeX.
 
+[![Preview PDF](https://img.shields.io/badge/Preview-blue?style=for-the-badge&logo=libreofficewriter)
+][pdf-preview]
+
 
 
 ## Getting Started
@@ -112,3 +115,6 @@ pdffonts dissertation.pdf
 ## License
 [![License: CC0-1.0](https://licensebuttons.net/p/zero/1.0/88x31.png)](http://creativecommons.org/publicdomain/zero/1.0/)
 To the extent possible under law, Daniel A. A. Pelsmaeker has waived all copyright and related or neighboring rights to the LaTeX PhD Thesis Template repository. Feel free to use this as you see fit, no attribution required.
+
+
+[pdf-preview]: https://raw.githubusercontent.com/Virtlink/latex-phd-thesis-template/ced2f6b822a9a45251bd1ad65e6d78ce0363b13e/snapshots/20241025T155454-dissertation.pdf
