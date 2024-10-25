@@ -1,0 +1,55 @@
+\chapter{Introduction}%
+\label{chap:introduction}
+
+\begin{abstract}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent convallis orci arcu, eu mollis dolor. Aliquam eleifend suscipit lacinia. Maecenas quam mi, porta ut lacinia sed, convallis ac dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti.
+\end{abstract}
+
+\blfootnote{This chapter is partly based on~\emph{A.\ Break. Intro into Procrastination, FF'17 (Student Research Competition)}~\cite{BreakSRC2017}.}
+
+\newpage
+
+This is a introductory page.
+
+
+Lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam? These are the fonts that are used:
+
+\begin{itemize}
+  \item Roman font: \rmdefault
+  \item Sans-serif font: \sfdefault
+  \item Teletype font: \ttdefault
+\end{itemize}
+
+Curabitur dictum felis id sapien mollis ut venenatis tortor feugiat. Curabitur sed velit diam. Integer aliquam, nunc ac egestas lacinia, nibh est vehicula nibh. We also have lists:
+
+\begin{enumerate}
+  \item Static Analysis examines program artifacts or their source code without executing them, while
+  \item Dynamic Analysis~4 relies on information gathered from their execution.
+\end{enumerate}
+
+
+Hanc ego cum teneam sententiam, quid est cur verear, ne ad eam non possim accommodare Torquatos nostros? Quos tu paulo ante cum memoriter, tum etiam erga nos amice et benivole collegisti. Or code:
+
+\begin{lstlisting}[caption={\textsc{QuickSort}},label={lst:e1}]
+fun <T: Comparable<T>> List<T>.quickSort(): List<T> = when {
+  size < 2 -> this
+  else -> {
+    val pivot = first()
+    val (smaller, greater) = drop(1).partition { it <= pivot }
+    smaller.quickSort() + pivot + greater.quickSort()
+  }
+}
+\end{lstlisting}
+
+Tu tam egregios viros censes tantas res gessisse sine causa? Quae fuerit causa, mox videro; interea hoc tenebo, si ob aliquam causam ista, quae sine dubio praeclara sunt. We also have equations:
+
+\begin{equation}
+  \sum_{n=1}^\infty \dfrac{1}{n^2}=\dfrac{\pi^2}{6}
+\end{equation}
+
+Atque haec ratio late patet. In quo enim maxime consuevit iactare vestra se oratio, tua praesertim, qui studiose antiqua persequeris, claris et fortibus viris commemorandis eorumque factis non emolumento aliquo, and some common ligatures:
+
+\begin{tabular}{ccccccccccccc}
+  ff & fi & fj & fl & ft & ffi & ffj & ffl & fft & Th & ts & tt & Qu
+\end{tabular}
+

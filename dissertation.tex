@@ -1,0 +1,67 @@
+\documentclass[
+  % print,            %% Show printing marks
+]{dissertation}
+
+% % Multiple bibliographies in a document (https://ctan.org/pkg/chapterbib)
+% \usepackage{chapterbib} %% (optional, not compatible with biblatex)
+
+\input{lib/packages}
+\input{lib/hyphenation}
+\input{lib/notes}
+\input{lib/glossary}
+\input{lib/macros}
+
+\graphicspath{{./src/}}
+
+\addbibresource{dissertation.bib}
+
+%%%%%%%%%%%%%%
+%% Metadata %%
+%%%%%%%%%%%%%%
+
+\title[Exploring the `Putting Things Off' Productivity System]{The Philosophy of Procrastination}
+\author{Anita}{Break}
+
+\begin{document}
+
+  %%%%%%%%%%%%%%%%%
+  %% Frontmatter %%
+  %%%%%%%%%%%%%%%%%
+  \frontmatter
+
+  \include{src/000-title}
+  \include{src/001-dedication}
+  \include{src/002-toc}
+  \include{src/003-summary}
+  \include{src/004-acknowledgements}
+
+  %%%%%%%%%%%%%%%%%
+  %% Main matter %%
+  %%%%%%%%%%%%%%%%%
+  \mainmatter
+  \thumbtrue    %% Turn on thumb indices
+
+  \include{src/100-introduction}
+  \include{src/200-background}
+  \include{src/300-conclusion}
+
+  %%%%%%%%%%%%%%%%
+  %% Appendices %%
+  %%%%%%%%%%%%%%%%
+  \appendix
+
+  \include{src/A00-appendix-a}
+
+  %%%%%%%%%%%%%%%%%
+  %% Back matter %%
+  %%%%%%%%%%%%%%%%%
+  \backmatter
+  \thumbfalse   %% Turn off thumb indices
+
+  \include{src/z01-bibliography}
+  \include{src/z02-glossary}
+  \include{src/z03-cv}
+  \include{src/z04-publications}
+  \include{src/z05-dissertation-series}
+
+\end{document}

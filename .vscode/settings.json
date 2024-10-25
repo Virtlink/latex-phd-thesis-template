@@ -1,0 +1,39 @@
+{
+  "[tex]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 120,
+    "editor.renderWhitespace": "all",
+    "editor.tabSize": 2,
+    "editor.indentSize": "tabSize",
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false
+  },
+  "[latex]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 120,
+    "editor.renderWhitespace": "all",
+    "editor.tabSize": 2,
+    "editor.indentSize": "tabSize",
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false
+  },
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "latexmk 🔃",
+      "tools": [
+        "latexmk"
+      ]
+    }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "%DOC%"
+      ],
+      "env": {}
+    }
+  ]
+}

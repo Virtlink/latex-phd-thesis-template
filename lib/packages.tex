@@ -1,0 +1,86 @@
+%%%%%%%%%%%
+%% Tools %%
+%%%%%%%%%%%
+
+%% Simple arithmetic in LaTeX commands (https://ctan.org/pkg/calc)
+% \usepackage{calc}
+%% Establish input relative to a directory (https://ctan.org/pkg/import)
+% \usepackage{import}
+%% Extended logo macros (https://ctan.org/pkg/metalogo)
+\usepackage{metalogo}  %% For the \LaTeX logo
+%% Convert EPS to PDF using Ghostscript (https://ctan.org/pkg/epstopdf)
+\usepackage[outdir=./img/]{epstopdf}    %% Allow including .EPS graphics
+%% Producing 'blind' text for testing (https://ctan.org/pkg/blindtext)
+\usepackage{blindtext}  %% For generating dummy text (lorem ipsum)
+
+
+%%%%%%%%%%%%%%%%%
+%% Typesetting %%
+%%%%%%%%%%%%%%%%%
+
+%% A variable-width \parbox command (https://ctan.org/pkg/pbox)
+% \usepackage{pbox}
+%% Graphics package-alike macros for "general" boxes (https://ctan.org/pkg/adjustbox)
+% \usepackage[export]{adjustbox}
+%% Disable/enable hyphenation. (https://ctan.org/pkg/hyphenat)
+% \usepackage{hyphenat}
+%% Define commands that appear not to eat spaces (https://ctan.org/pkg/xspace)
+\usepackage{xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Glossaries & Acronyms %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Create glossaries and lists of acronyms (https://ctan.org/pkg/glossaries)
+\usepackage[
+  toc,            %% Make the Glossary chapter in the ToC
+  nomain,         %% Suppress the `main` glossary, we use `acronym`
+  acronym,        %% Create a new glossary with label `acronym`
+  nonumberlist,   %% Don't print numbers with the glossary entries
+  style=list,     %% Set the default glossary style, one of: list, altlist, listgroup, listhypergroup
+]{glossaries}
+\setacronymstyle{long-short}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%% Tables & Figures %%
+%%%%%%%%%%%%%%%%%%%%%%
+
+%% Tabulars with adjustable-width columns (https://ctan.org/pkg/tabularx)
+\usepackage{tabularx}
+%% Create tabular cells spanning multiple rows (https://ctan.org/pkg/multirow)
+% \usepackage{multirow}
+%% Intermix single and multiple columns (https://ctan.org/pkg/multicol)
+\usepackage{multicol}  %% For the Dissertation Series list
+%% Permit footnotes in tables (https://ctan.org/pkg/tablefootnote)
+% \usepackage{tablefootnote}
+%% Extending the array and tabular environments (https://ctan.org/pkg/array)
+% \usepackage{array}
+%% Customising captions in floating environments (https://ctan.org/pkg/caption)
+\usepackage[nooneline,footnotesize]{caption}
+%% Support for sub-captions (https://ctan.org/pkg/subcaption)
+% \usepackage{subcaption}
+%% Improved interface for floating objects (https://ctan.org/pkg/float)
+% \usepackage{float}
+%% Define new floating environments (https://ctan.org/pkg/newfloat)
+% \usepackage{newfloat}
+%% A package for producing framed minipages (https://ctan.org/pkg/boxedminipage)
+% \usepackage{boxedminipage}
+%% Control float placement (https://ctan.org/pkg/placeins)
+% \usepackage[section]{placeins}  %% To make figures appear in the same section
+
+
+%%%%%%%%%%%%%%%%
+%% Algorithms %%
+%%%%%%%%%%%%%%%%
+%% The algorithmic style you always wanted (https://ctan.org/pkg/algorithmicx)
+\usepackage{algpseudocode}
+
+
+%%%%%%%%%%%
+%% Lists %%
+%%%%%%%%%%%
+
+%% Reverse-counting enumerate environment (https://ctan.org/pkg/etaremune)
+\usepackage{etaremune}  %% For the reversed list of publications
