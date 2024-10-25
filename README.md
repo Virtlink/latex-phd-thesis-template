@@ -1,7 +1,7 @@
 # PhD Thesis
-[![Build](https://github.com/Virtlink/phd-thesis-template/actions/workflows/paper.yml/badge.svg)](https://github.com/Virtlink/phd-thesis-template/actions)
-[![License](https://img.shields.io/github/license/Virtlink/phd-thesis-template)](https://github.com/Virtlink/phd-thesis-template/blob/main/LICENSE)
-[![Artifact](https://img.shields.io/badge/artifact-latest-brightgreen)](https://nightly.link/Virtlink/phd-thesis-template/workflows/build/main/paper.zip)
+[![Build](https://github.com/Virtlink/latex-phd-thesis-template/actions/workflows/paper.yml/badge.svg)](https://github.com/Virtlink/latex-phd-thesis-template/actions)
+[![License](https://img.shields.io/github/license/Virtlink/latex-phd-thesis-template)](https://github.com/Virtlink/latex-phd-thesis-template/blob/main/LICENSE)
+[![Artifact](https://img.shields.io/badge/artifact-latest-brightgreen)](https://nightly.link/Virtlink/latex-phd-thesis-template/workflows/build/main/paper.zip)
 
 This is my PhD Thesis Template for LaTeX.  It is designed to work with XeLaTeX.
 
@@ -20,7 +20,7 @@ Otherwise, use Git to create a repository locally, based on this template:
 mkdir my-latex-paper/
 cd my-latex-paper/
 git init
-git remote add upstream https://github.com/Virtlink/phd-thesis-template.git
+git remote add upstream https://github.com/Virtlink/latex-phd-thesis-template.git
 git fetch upstream
 git merge upstream/main
 ```
