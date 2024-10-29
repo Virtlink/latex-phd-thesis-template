@@ -144,10 +144,12 @@
 
 %% Sophisticated bibliographies (https://ctan.org/pkg/biblatex)
 \RequirePackage[
+  natbib=true,          %% support natbib commands \citep, \citet
   backend=biber,        %% use biber as the backend
+  % style=numeric,        %% citation style
   style=authoryear,     %% citation style
-  sorting=ynt,          %% sorting order: year, name, title
-  maxbibnames=999       %% display up to 999 author names (no `et. al.`)
+  sorting=nyt,          %% sorting order: name, year, title
+  maxbibnames=999       %% display up to 999 author names (no `et. al.`) in the bibliography section
 ]{biblatex}
 
 
