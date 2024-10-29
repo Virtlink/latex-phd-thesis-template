@@ -17,10 +17,11 @@ SNAPNAME    = $(DOCNAME)
 ARCHIVEDIR  = archive
 # Name for source archives
 ARCHIVENAME = $(DOCNAME)
-# Researchr bibliography file
-SRCBIB      = researchr.bib
+# Researchr bibliography file and name
+SRCBIBS     = \
+	00000000-0000-0000-0000-000000000000-dissertation.bib
 # Source files
-SRCFILES    = $(MAINTEX) $(SRCBIB) \
+SRCFILES    = $(MAINTEX) $(SRCBIBS) \
 	$(wildcard $(SRCDIR)/**/*.tex) \
 	$(wildcard $(SRCDIR)/**/*.bib) \
 	$(wildcard $(SRCDIR)/**/*.png) \
@@ -29,8 +30,6 @@ SRCFILES    = $(MAINTEX) $(SRCBIB) \
 	$(wildcard $(SRCDIR)/**/*.pdf) \
 	$(wildcard $(LIBDIR)/*) \
 	latexmkrc
-# Researchr bibliography name
-RESEARCHR   = 00000000-0000-0000-0000-000000000000-dissertation
 
 LATEXMK     = latexmk
 LIVE        = -pvc -view=none -halt-on-error
@@ -44,19 +43,21 @@ all: $(DOCUMENT)
 	$(LATEXMK) "$<" -jobname=${*F}
 	@echo "Done building $@"
 
-# Download the latest bibliography from Researchr and fix it
-bib: clean-bib $(SRCBIB)
-$(SRCBIB):
-	curl -s "https://researchr.org/downloadbibtex/bibliography/$(RESEARCHR)" -o $@
+# Download the latest bibliographies from Researchr and fix them
+bib: clean-bib $(SRCBIBS)
+
+# Download a bibliography from Researchr and fix it
+%.bib:
+	curl -s "https://researchr.org/downloadbibtex/bibliography/$*" -o $@
 	sed -i '' '1 s/^/% /' $@
 	sed -i '' 's/doi = {http.*\/\(10\..*\)}/doi = {\1}/' $@
 	sed -i '' '/doi = {http.*}/d' $@
 	sed -i '' 's/\&uuml;/ü/' $@
-	@echo "Updated $@ from https://researchr.org/downloadbibtex/bibliography/$(RESEARCHR)"
+	@echo "Updated $@ from https://researchr.org/downloadbibtex/bibliography/$*"
 
-# Remove the bibliography
+# Remove the bibliographies
 clean-bib:
-	-@rm $(SRCBIB)
+	-@rm $(SRCBIBS)
 
 # Removes PDF build files
 clean:
