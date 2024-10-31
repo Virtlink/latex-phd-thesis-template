@@ -258,12 +258,12 @@
   numbersep=5pt,                        %% how far the line-numbers are from the code
   showspaces=false,                     %% show spaces everywhere adding particular underscores; it
   stepnumber=1,                         %% the step between two line-numbers. If it's 1, each line will be numbered
-  numberstyle=\tiny\color{listings-number-fg},
+  basicstyle=\small\ttfamily,
+  numberstyle=\scriptsize\color{listings-number-fg},
   breaklines        = true,
   breakatwhitespace = true,
   breakindent       = 2ex,
   escapechar        = *,
-  basicstyle=\scriptsize\ttfamily,
   columns = flexible,                   %% prevent glue form being inserted between characters
 }
 
