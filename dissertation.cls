@@ -137,6 +137,9 @@
 %% Subliminal refinements towards typographical perfection (https://ctan.org/pkg/microtype)
 \RequirePackage{microtype}
 
+%% Set space between lines (https://ctan.org/pkg/setspace)
+\RequirePackage[onehalfspacing]{setspace}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Bibliography & References %%
