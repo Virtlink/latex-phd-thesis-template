@@ -17,6 +17,7 @@
     "editor.insertSpaces": true,
     "editor.detectIndentation": false
   },
+  "latex-workshop.latex.jobname": "dissertation",
   "latex-workshop.latex.autoBuild.run": "onSave",
   "latex-workshop.latex.recipes": [
     {
@@ -31,6 +32,7 @@
       "name": "latexmk",
       "command": "latexmk",
       "args": [
+        "-jobname=dissertation",
         "%DOC%"
       ],
       "env": {}
