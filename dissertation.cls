@@ -12,6 +12,9 @@
   10pt                      %% default font size
 ]{book}
 
+%% Am I running under XeTeX? (https://ctan.org/pkg/ifxetex)
+\RequirePackage{ifxetex}
+
 
 %%%%%%%%%%%%
 %% Colors %%
@@ -45,29 +48,44 @@
 \colorlet{thumb-bg}{brand-main}
 \colorlet{thumb-fg}{brand-darkgray}
 
-%% Background color for code listings
-\colorlet{listings-bg}{brand-lightgray}
-\colorlet{listings-number-fg}{brand-main}
+%% Code listings colors
+\colorlet{listings-bg}{white}               %% Background color
+\colorlet{listings-number-fg}{brand-main}   %% Foreground color
+\colorlet{listings-hl}{brand-lightgray}     %% Highlighted line background color
 
+%% Code syntax colors
+\definecolor{code-keywords}{rgb}{0.2,0.2,0.5}
+\definecolor{code-comments}{rgb}{0.0,0.4,0.2}
+\definecolor{code-numbers}{rgb}{0.5,0.5,0.5}
+\definecolor{code-strings}{rgb}{0.58,0,0.82}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Language and Encoding %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Accept different input encodings (https://ctan.org/pkg/inputenc)
-\RequirePackage[
-  utf8                      % Unicode UTF-8 encoding support
-]{inputenc}
-%% Standard package for selecting font encodings (https://ctan.org/pkg/fontenc)
-\RequirePackage[
-  T1                        % https://tex.stackexchange.com/a/677/108670
-]{fontenc}
-%% Multilingual support (https://ctan.org/pkg/babel)
-\RequirePackage[
-  main=USenglish,
-  dutch,
-]{babel}
+\ifXeTeX
+  %% Advanced font selection (https://ctan.org/pkg/fontspec)
+  \RequirePackage{fontspec}
+  %% An alternative to babel for XeLaTeX and LuaLaTeX (https://ctan.org/pkg/polyglossia)
+  \RequirePackage{polyglossia}
+  \setmainlanguage{english}
+  \setotherlanguage{dutch}
+\else
+  %% Standard package for selecting font encodings (https://ctan.org/pkg/fontenc)
+  \RequirePackage[
+    T1                        % https://tex.stackexchange.com/a/677/108670
+  ]{fontenc}
+  %% Accept different input encodings (https://ctan.org/pkg/inputenc)
+  \RequirePackage[
+    utf8                      % Unicode UTF-8 encoding support
+  ]{inputenc}
+  %% Multilingual support (https://ctan.org/pkg/babel)
+  \RequirePackage[
+    main=USenglish,
+    dutch,
+  ]{babel}
+\fi
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -90,9 +108,8 @@
 %% Fonts & Typesetting %%
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Advanced font selection (https://ctan.org/pkg/fontspec)
-\RequirePackage{fontspec}
 \setmainfont{LibertinusSerif}[
+  Path            = ./fonts/libertinus/,
   Extension       = .otf,
   UprightFont     = *-Regular,
   BoldFont        = *-Bold,
@@ -101,6 +118,7 @@
   Ligatures       = TeX,
 ]
 \setsansfont{LibertinusSans}[
+  Path            = ./fonts/libertinus/,
   Extension       = .otf,
   UprightFont     = *-Regular,
   BoldFont        = *-Bold,
@@ -119,6 +137,7 @@
   Scale           = 0.85,
 ]
 \setmathfont{LibertinusMath-Regular.otf}[
+  Path            = ./fonts/libertinus/,
   Scale           = MatchLowercase,
 ]
 
@@ -140,6 +159,13 @@
 %% Set space between lines (https://ctan.org/pkg/setspace)
 \RequirePackage[onehalfspacing]{setspace}
 
+%% String manipulation for LaTeX
+\RequirePackage{xstring}
+
+%% Set the font size relative to the current font size
+\RequirePackage{relsize}
+\renewcommand\RSsmallest{4.5pt}  % Removes warnings: "package relsize: Font size 4.61pt is too small. Using 5.0pt instead."
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Bibliography & References %%
@@ -152,7 +178,8 @@
   % style=numeric,        %% citation style
   style=authoryear,     %% citation style
   sorting=nyt,          %% sorting order: name, year, title
-  maxbibnames=999       %% display up to 999 author names (no `et. al.`) in the bibliography section
+  maxbibnames=999,      %% display up to 999 author names (no `et. al.`) in the bibliography section
+  dashed=false,         %% don't replace repeat authors by dashes in the bibliography
 ]{biblatex}
 
 
@@ -168,7 +195,7 @@
     layoutsize={167mm,240mm},
     layoutoffset={3mm,11mm},
     bindingoffset={3mm},
-    textwidth={127.4818mm},
+    textwidth={115mm},
     hscale=0.75,              %% We decrease the margins slightly from the default (scale = 0.7).
     vscale=0.8,
     xetex,                    %% driver
@@ -178,7 +205,7 @@
   \RequirePackage[
     papersize={170mm,240mm},  %% paper size
     layoutoffset={0mm,7mm},
-    textwidth={127.4818mm},
+    textwidth={115mm},
     hscale=0.75,              %% We decrease the margins slightly from the default (scale = 0.7).
     vscale=0.8,
     xetex,                    %% driver
@@ -241,7 +268,7 @@
 }
 
 %% Intelligent cross-referencing (https://ctan.org/pkg/cleveref)
-\RequirePackage{cleveref}   %% Load AFTER hyperref
+\RequirePackage[capitalise]{cleveref}   %% Load AFTER hyperref
 
 
 
@@ -251,20 +278,48 @@
 
 %% Typeset source code listings (https://ctan.org/pkg/listings)
 \RequirePackage{listings}
+%% Add-on packages for listings: autogobble and line background (https://ctan.org/pkg/lstaddons)
+\RequirePackage{lstautogobble}
+
+%% Default style
+\lstdefinestyle{lst-defaultstyle}{
+    commentstyle=\color{code-comments},
+    keywordstyle=\bfseries\color{code-keywords},
+    numberstyle=\tiny\color{code-numbers},
+    stringstyle=\color{code-strings},
+    basicstyle=%
+      \ttfamily%
+      \mdseries%
+      \lst@ifdisplaystyle\scriptsize\fi,  % Conditional \scriptsize, if it is not inline
+    % breakatwhitespace=false,
+    % breaklines=true,
+    % captionpos=b,
+    % keepspaces=true,
+    %numbers=left,      % we regularly point to line numbers, so make those resolvable
+    %xleftmargin=2em,   % prevent line numbers overflowing margins
+    % numbersep=5pt,
+    % showspaces=false,
+    % showstringspaces=false,
+    % showtabs=false,
+    % tabsize=2
+}
 
 \lstset{%
+  autogobble=true,
+  mathescape=true,
+  escapeinside={`}{`},
   backgroundcolor=\color{listings-bg},  %% background color
   numbers=left,                         %% where to put the line-numbers; possible values are (none, left, right)
   numbersep=5pt,                        %% how far the line-numbers are from the code
   showspaces=false,                     %% show spaces everywhere adding particular underscores; it
   stepnumber=1,                         %% the step between two line-numbers. If it's 1, each line will be numbered
-  basicstyle=\small\ttfamily,
+  % basicstyle=\small\ttfamily,
   numberstyle=\scriptsize\color{listings-number-fg},
   breaklines        = true,
   breakatwhitespace = true,
   breakindent       = 2ex,
-  escapechar        = *,
   columns = flexible,                   %% prevent glue form being inserted between characters
+  style = lst-defaultstyle,
 }
 
 %% Allow ligatures in verbatim environments
@@ -280,6 +335,23 @@
 
 %% Control layout of itemize, enumerate, description (https://ctan.org/pkg/enumitem)
 \RequirePackage{enumitem}
+
+
+%%%%%%%%%%%%%%
+%% Theorems %%
+%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{theorem*}{Theorem}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
 
 
 %%%%%%%%%%%%%%%
@@ -311,17 +383,21 @@
   \newcommand*\cropmarks{%
     \ifodd\c@page%
       \begin{tikzpicture}[remember picture,overlay]
-        \draw ($(current page.north east)+(0mm,-3mm)$) -- ($(current page.north east)+(-2mm,-3mm)$);
-        \draw ($(current page.north east)+(-3mm,0mm)$) -- ($(current page.north east)+(-3mm,-2mm)$);
-        \draw ($(current page.south east)+(0mm,3mm)$) -- ($(current page.south east)+(-2mm,3mm)$);
-        \draw ($(current page.south east)+(-3mm,0mm)$) -- ($(current page.south east)+(-3mm,2mm)$);
+        \draw ($(current page.north east)+( 0mm,-3mm)$) -- ($(current page.north east)+(-2mm,-3mm)$);
+        \draw ($(current page.north east)+(-3mm, 0mm)$) -- ($(current page.north east)+(-3mm,-2mm)$);
+        \draw ($(current page.south east)+( 0mm, 3mm)$) -- ($(current page.south east)+(-2mm, 3mm)$);
+        \draw ($(current page.south east)+(-3mm, 0mm)$) -- ($(current page.south east)+(-3mm, 2mm)$);
+        \draw ($(current page.north west)+( 0mm, 0mm)$) -- ($(current page.north west)+( 0mm,-2mm)$);
+        \draw ($(current page.south west)+( 0mm, 0mm)$) -- ($(current page.south west)+( 0mm, 2mm)$);
       \end{tikzpicture}%
     \else%
       \begin{tikzpicture}[remember picture,overlay]
-        \draw ($(current page.north west)+(0mm,-3mm)$) -- ($(current page.north west)+(2mm,-3mm)$);
-        \draw ($(current page.north west)+(3mm,0mm)$) -- ($(current page.north west)+(3mm,-2mm)$);
-        \draw ($(current page.south west)+(0mm,3mm)$) -- ($(current page.south west)+(2mm,3mm)$);
-        \draw ($(current page.south west)+(3mm,0mm)$) -- ($(current page.south west)+(3mm,2mm)$);
+        \draw ($(current page.north west)+( 0mm,-3mm)$) -- ($(current page.north west)+( 2mm,-3mm)$);
+        \draw ($(current page.north west)+( 3mm, 0mm)$) -- ($(current page.north west)+( 3mm,-2mm)$);
+        \draw ($(current page.south west)+( 0mm, 3mm)$) -- ($(current page.south west)+( 2mm, 3mm)$);
+        \draw ($(current page.south west)+( 3mm, 0mm)$) -- ($(current page.south west)+( 3mm, 2mm)$);
+        \draw ($(current page.north east)+( 0mm, 0mm)$) -- ($(current page.north east)+( 0mm,-2mm)$);
+        \draw ($(current page.south east)+( 0mm, 0mm)$) -- ($(current page.south east)+( 0mm, 2mm)$);
       \end{tikzpicture}%
     \fi%
   }
@@ -355,8 +431,8 @@
 \newcommand*\lthumb{%
   \ifthumb%
     \begin{tikzpicture}[remember picture,overlay]
-      \coordinate (top margin) at (0pt,1in+\topmargin+\headheight+\headsep);
-      \coordinate (left margin) at (1.1in+\evensidemargin,0pt);
+      \coordinate (top margin) at (0pt,2.5cm+\topmargin+\headheight+\headsep);
+      \coordinate (left margin) at (2.1cm+\evensidemargin,0pt);
       %% Calculate the corners of the thumb index based on the current chapter number.
       \coordinate (top left) at ($(current page.north west)-(top margin)-(0pt,\value{chapter}\thumbvspace-\thumbvspace)$);
       \coordinate (bottom right) at ($(top left)+(left margin)-(\thumbhspace,\thumbheight)$);
@@ -379,8 +455,8 @@
 \newcommand*\rthumb{%
   \ifthumb%
     \begin{tikzpicture}[remember picture,overlay]
-      \coordinate (top margin) at (0pt,1in+\topmargin+\headheight+\headsep);
-      \coordinate (right margin) at (1.1in+\evensidemargin,0pt);
+      \coordinate (top margin) at (0pt,2.5cm+\topmargin+\headheight+\headsep);
+      \coordinate (right margin) at (2.1cm+\evensidemargin,0pt);
       %% Calculate the corners of the thumb index based on the current chapter number.
       \coordinate (top right) at ($(current page.north east)-(top margin)-(0pt,\value{chapter}\thumbvspace-\thumbvspace)$);
       \coordinate (bottom left) at ($(top right)-(right margin)-(-\thumbhspace,\thumbheight)$);
