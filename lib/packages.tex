@@ -12,7 +12,8 @@
 \usepackage[outdir=./img/]{epstopdf}    %% Allow including .EPS graphics
 %% Producing 'blind' text for testing (https://ctan.org/pkg/blindtext)
 \usepackage{blindtext}  %% For generating dummy text (lorem ipsum)
-
+%% Extended conditional commands (https://ctan.org/pkg/xifthen)
+% \usepackage{xifthen}
 
 %%%%%%%%%%%%%%%%%
 %% Typesetting %%
@@ -26,7 +27,9 @@
 % \usepackage{hyphenat}
 %% Define commands that appear not to eat spaces (https://ctan.org/pkg/xspace)
 \usepackage{xspace}
-
+%% Set the font size relative to the current font size (https://ctan.org/pkg/relsize)
+\usepackage{relsize}
+\renewcommand\RSsmallest{4.5pt}  %% Removes warnings: "package relsize: Font size 4.61pt is too small. Using 5.0pt instead."
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Glossaries & Acronyms %%
