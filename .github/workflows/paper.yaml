@@ -16,8 +16,9 @@ jobs:
       - name: 'Checkout'
         uses: actions/checkout@v4
       - name: 'Compile'
-        uses: xu-cheng/latex-action@v3
+        uses: xu-cheng/latex-action@v4
         with:
+          pre_compile: ./create-aux-dirs.sh
           root_file: dissertation.tex
           args:
       - name: 'Upload'
