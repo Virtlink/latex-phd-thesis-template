@@ -32,15 +32,18 @@
 %% Glossaries & Acronyms %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Create glossaries and lists of acronyms (https://ctan.org/pkg/glossaries)
+%% An extension to the glossaries package (https://ctan.org/pkg/glossaries-extra)
 \usepackage[
-  toc,            %% Make the Glossary chapter in the ToC
-  nomain,         %% Suppress the `main` glossary, we use `acronym`
-  acronym,        %% Create a new glossary with label `acronym`
-  nonumberlist,   %% Don't print numbers with the glossary entries
-  style=list,     %% Set the default glossary style, one of: list, altlist, listgroup, listhypergroup
-]{glossaries}
-\setacronymstyle{long-short}
+  automake,
+  acronyms,
+  abbreviations,
+  nonumberlist,
+  shortcuts,
+  nopostdot,
+  toc,
+  style=super,
+]{glossaries-extra}
+\setabbreviationstyle{long-short-desc}
 
 
 %%%%%%%%%%%%%%%%%%%%%%

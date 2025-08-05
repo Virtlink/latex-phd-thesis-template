@@ -30,6 +30,9 @@ _minted*
 *.glg
 *.glo
 *.gls
+*.glg-*
+*.glo-*
+*.gls-*
 *.glsdefs
 *.gnuplot
 *.hst

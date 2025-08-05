@@ -1,6 +1,14 @@
 % Hyphenation for letterspacing, underlining, and more (https://ctan.org/pkg/soul)
 \usepackage{soul}
 
-\babelhyphenation[english]{proj-ect}
-\babelhyphenation[english]{two-fold}
-\babelhyphenation[english]{wide-spread}
+\ifXeTeX
+  \hyphenation{%
+    proj-ect
+    two-fold
+    wide-spread
+  }
+\else
+  \babelhyphenation[english]{proj-ect}
+  \babelhyphenation[english]{two-fold}
+  \babelhyphenation[english]{wide-spread}
+\fi
