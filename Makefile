@@ -17,9 +17,9 @@ SNAPNAME    = $(DOCNAME)
 ARCHIVEDIR  = archive
 # Name for source archives
 ARCHIVENAME = $(DOCNAME)
-# Researchr bibliography file and name
+# Researchr bibliography files
 SRCBIBS     = \
-	00000000-0000-0000-0000-000000000000-dissertation.bib
+	$(SRCDIR)/00000000-0000-0000-0000-000000000000-dissertation.bib
 # Source files
 SRCFILES    = $(MAINTEX) $(SRCBIBS) \
 	$(wildcard $(SRCDIR)/**/*.tex) \
@@ -39,7 +39,7 @@ DOCUMENT    = $(DOCDIR)/$(DOCNAME).pdf
 all: $(DOCUMENT)
 
 # Build a PDF
-%.pdf: %.tex $(SRCFILES) aux-dirs
+$(DOCUMENT): $(MAINTEX) $(SRCFILES) aux-dirs
 	$(LATEXMK) "$<" -jobname=${*F}
 	@echo "Done building $@"
 
@@ -48,12 +48,12 @@ bib: clean-bib $(SRCBIBS)
 
 # Download a bibliography from Researchr and fix it
 %.bib:
-	curl -s "https://researchr.org/downloadbibtex/bibliography/$*" -o $@
+	curl -s "https://researchr.org/downloadbibtex/bibliography/$(notdir $*)" -o $@
 	sed -i '' '1 s/^/% /' $@
 	sed -i '' 's/doi = {http.*\/\(10\..*\)}/doi = {\1}/' $@
 	sed -i '' '/doi = {http.*}/d' $@
 	sed -i '' 's/\&uuml;/ü/' $@
-	@echo "Updated $@ from https://researchr.org/downloadbibtex/bibliography/$*"
+	@echo "Updated $@ from https://researchr.org/downloadbibtex/bibliography/$(notdir $*)"
 
 # Remove the bibliographies
 clean-bib:
