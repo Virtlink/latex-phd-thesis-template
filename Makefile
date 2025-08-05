@@ -3,7 +3,7 @@ SRCDIR      = src
 # Directory with the library files
 LIBDIR      = lib
 # Directory where the build files are located
-BUILDDIR    = .
+BUILDDIR    = build
 # Directory where the PDF is copied
 DOCDIR      = .
 DOCNAME     = dissertation
@@ -39,7 +39,7 @@ DOCUMENT    = $(DOCDIR)/$(DOCNAME).pdf
 all: $(DOCUMENT)
 
 # Build a PDF
-%.pdf: %.tex $(SRCFILES)
+%.pdf: %.tex $(SRCFILES) aux-dirs
 	$(LATEXMK) "$<" -jobname=${*F}
 	@echo "Done building $@"
 
@@ -86,7 +86,12 @@ archive: $(DOCUMENT)
 	cd $(BUILDDIR)   && zip --grow $(ARCHIVEFILE) $(shell cd $(BUILDDIR)   && find . -type f -name '*.bbl')
 	cd .             && zip --grow $(ARCHIVEFILE) $(shell cd .             && find . -type f -maxdepth 1 -name '*.tex' -o -name 'README.md' -o -name 'Makefile' -o -name 'latexmkrc')
 
-.PHONY: all bib clean-bib clean clean-all watch snapshot archive
+# Create auxiliary directories
+aux-dirs:
+	@echo "Creating auxiliary directories..."
+	./create-build-dirs.sh
+
+.PHONY: all bib clean-bib clean clean-all watch snapshot archive aux-dirs
 .SILENT:
 .SUFFIXES: .pdf
 .PRECIOUS: $(DOCUMENT)
