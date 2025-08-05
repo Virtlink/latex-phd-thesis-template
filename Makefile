@@ -89,7 +89,7 @@ archive: $(DOCUMENT)
 # Create auxiliary directories
 aux-dirs:
 	@echo "Creating auxiliary directories..."
-	./create-build-dirs.sh
+	./create-aux-dirs.sh
 
 .PHONY: all bib clean-bib clean clean-all watch snapshot archive aux-dirs
 .SILENT:
